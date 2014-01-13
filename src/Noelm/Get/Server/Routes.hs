@@ -7,14 +7,16 @@ import qualified Data.ByteString as BS
 import qualified Data.ByteString.Char8 as BSC
 import qualified Data.Maybe as Maybe
 import qualified Data.List as List
+import qualified Data.Char as Char
 import Control.Applicative
 import Control.Monad.Error
+import System.Directory
+import System.FilePath
+
 
 import Snap.Core
 import Snap.Util.FileServe
 import Snap.Util.FileUploads
-import System.Directory
-import System.FilePath
 
 {- Noelm modules -}
 import qualified Noelm.Internal.Name as N
