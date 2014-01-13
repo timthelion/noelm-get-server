@@ -59,3 +59,42 @@ Executable noelm-get-server
                        snap-server,
                        unordered-containers
                        
+Executable noelm-get-server-remove
+  Main-is:             Noelm/Get/Server/Remover.hs
+  ghc-options:         -threaded -O2
+  Hs-Source-Dirs:      src
+
+  other-modules:
+       Noelm.Get.Server.Routes
+      ,Noelm.Get.Server.Generate.Docs
+      ,Noelm.Get.Server.Generate.Html
+      ,Noelm.Get.Server.Generate.Listing
+      ,Noelm.Get.Server.Generate.Noelm
+
+
+  Build-depends:       base >=4.2 && <5,
+                       binary,
+                       noelm-get,
+                       bytestring,
+                       cmdargs,
+                       containers,
+                       directory,
+                       Noelm >= 0.10.0,
+                       filepath,
+                       HTTP,
+                       http-conduit >= 1.9, http-conduit < 2.0,
+                       http-types,
+                       json,
+                       mtl,
+                       network,
+                       pretty,
+                       process,
+                       resourcet,
+                       text,
+                       vector,
+                       aeson,
+                       blaze-html,
+                       parsec,
+                       snap-core,
+                       snap-server,
+                       unordered-containers
