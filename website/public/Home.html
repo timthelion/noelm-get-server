@@ -1,0 +1,422 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="UTF-8"><style type="text/css">
+  a:link {text-decoration: none; color: rgb(15,102,230);}
+  a:visited {text-decoration: none; color: rgb(15,102,230);}
+  a:active {text-decoration: none}
+  a:hover {text-decoration: underline; color: rgb(234,21,122);}
+  body { font-family: "Lucida Grande","Trebuchet MS","Bitstream Vera Sans",Verdana,Helvetica,sans-serif !important; }
+  p, li { font-size: 14px !important;
+          line-height: 1.5em !important; }
+</style><title>Home</title><script type="text/javascript" src="/resources/noelm-runtime.js"></script><script type="text/javascript">Elm.Home = Elm.Home || {};
+Elm.Home.make = function (_elm)
+                {
+                  _elm.Home = _elm.Home || {};
+                  if (_elm.Home.values)
+                  return _elm.Home.values;
+                  var N = Elm.Native,
+                      _N = N.Utils.make(_elm),
+                      _L = N.List.make(_elm),
+                      _E = N.Error.make(_elm),
+                      _J = N.JavaScript.make(_elm),
+                      $moduleName = "Home";
+                  var Text = Elm.Text.make(_elm);
+                  var Text = Elm.Text.make(_elm);
+                  var Basics = Elm.Basics.make(_elm);
+                  var Signal = Elm.Signal.make(_elm);
+                  var List = Elm.List.make(_elm);
+                  var Maybe = Elm.Maybe.make(_elm);
+                  var Time = Elm.Time.make(_elm);
+                  var Prelude = Elm.Prelude.make(_elm);
+                  var Graphics = Graphics || {};
+                  Graphics.Element = Elm.Graphics.Element.make(_elm);
+                  var Color = Elm.Color.make(_elm);
+                  var Graphics = Graphics || {};
+                  Graphics.Collage = Elm.Graphics.Collage.make(_elm);
+                  var String = Elm.String.make(_elm);
+                  var Website = Website || {};
+                  Website.ColorScheme = Elm.Website.ColorScheme.make(_elm);
+                  var Website = Website || {};
+                  Website.Skeleton = Elm.Website.Skeleton.make(_elm);
+                  var Window = Elm.Window.make(_elm);
+                  var JavaScript = Elm.JavaScript.make(_elm);
+                  var _op = {};
+                  var title = Signal.constant(JavaScript.fromString("Noelm Public Library"));
+                  var rightCol = function (w)
+                                 {
+                                   return A2(Graphics.Element.width,
+                                             w,
+                                             Text.markdown("<div style=\"height:0;width:0;\">&nbsp;</div><style>\nh1,h2,h3,h4 {font-weight:normal;}\npre { background-color: white;\n      padding: 10px;\n      border: 1px solid rgb(216, 221, 225);\n      border-radius: 4px;\n}\nli { padding: 2px; }\n</style>\n\n<h1 id=\"design-guidelines\">Design Guidelines</h1>\n<p>Before publishing libraries with <a href=\"https://github.com/timthelion/noelm-get\"><code>noelm-get</code></a>, look through the <a href=\"/DesignGuidelines.html\">Library Design Guidelines</a>. Some key takeaways are:</p>\n<ul>\n<li>Design for a concrete use case</li>\n<li>Use human readable names</li>\n<li>Avoid gratuitous abstraction</li>\n<li>Use semantic versioning</li>\n<li>Write <a href=\"/Documentation.html\">nice documentation</a></li>\n</ul>\n<p>After looking through <a href=\"/DesignGuidelines.html\">the guidelines</a> carefully and <a href=\"/Documentation.html\">writing helpful documentation</a>, publish your library with:</p>\n<pre><code>noelm-get publish</code></pre><div style=\"height:0;width:0;\">&nbsp;</div>",
+                                                           "51:22"));
+                                 };
+                  var padCol = F2(function (w,col)
+                                  {
+                                    return function ()
+                                           {
+                                             var col$ = col(w - 60);
+                                             return A4(Graphics.Element.container,
+                                                       w,
+                                                       Graphics.Element.heightOf(col$),
+                                                       Graphics.Element.middle,
+                                                       col$);
+                                           }();
+                                  });
+                  var leftCol = function (w)
+                                {
+                                  return A2(Graphics.Element.width,
+                                            w,
+                                            Text.markdown("<div style=\"height:0;width:0;\">&nbsp;</div><style>\nh1,h2,h3,h4 {font-weight:normal;}\npre { background-color: white;\n      padding: 10px;\n      border: 1px solid rgb(216, 221, 225);\n      border-radius: 4px;\n}\n</style>\n\n<h1 id=\"install-libraries\">Install Libraries</h1>\n<p>Use <a href=\"https://github.com/timthelion/noelm-get\"><code>noelm-get</code></a> to install libraries:</p>\n<pre><code>noelm-get install user/project</code></pre>\n<p><a href=\"https://github.com/timthlion/noelm-get\"><code>noelm-get</code></a> is sandboxed by default, installing on a per-project basis. It is also backed by <a href=\"https://github.com/\">GitHub</a>, so you can use it to install any public repo.</p><div style=\"height:0;width:0;\">&nbsp;</div>",
+                                                          "27:21"));
+                                };
+                  var scene = function (w)
+                              {
+                                return A2(Graphics.Element.flow,
+                                          Graphics.Element.down,
+                                          _J.toList([A2(Graphics.Element.spacer,w,20),
+                                                     A2(Graphics.Element.flow,
+                                                        Graphics.Element.right,
+                                                        _J.toList([A2(padCol,
+                                                                      A2(Basics.div,w,2),
+                                                                      leftCol),
+                                                                   A2(padCol,
+                                                                      A2(Basics.div,w,2),
+                                                                      rightCol)]))]));
+                              };
+                  var main = Website.Skeleton.home(scene);
+                  A2(Signal.lift,
+                     function (_v)
+                     {
+                       var _e = document.createEvent("Event");
+                       _e.initEvent("title_" + _elm.id,true,true);
+                       _e.value = _v;
+                       document.dispatchEvent(_e);
+                       return _v;
+                     },
+                     title);
+                  _elm.Home.values = {_op: _op, title: title, padCol: padCol, scene: scene, leftCol: leftCol, rightCol: rightCol, main: main};
+                  return _elm.Home.values;
+                };Elm.Website = Elm.Website || {};
+Elm.Website.Skeleton = Elm.Website.Skeleton || {};
+Elm.Website.Skeleton.make = function (_elm)
+                            {
+                              _elm.Website = _elm.Website || {};
+                              _elm.Website.Skeleton = _elm.Website.Skeleton || {};
+                              if (_elm.Website.Skeleton.values)
+                              return _elm.Website.Skeleton.values;
+                              var N = Elm.Native,
+                                  _N = N.Utils.make(_elm),
+                                  _L = N.List.make(_elm),
+                                  _E = N.Error.make(_elm),
+                                  _J = N.JavaScript.make(_elm),
+                                  $moduleName = "Website.Skeleton";
+                              var Text = Elm.Text.make(_elm);
+                              var Text = Elm.Text.make(_elm);
+                              var Basics = Elm.Basics.make(_elm);
+                              var Signal = Elm.Signal.make(_elm);
+                              var List = Elm.List.make(_elm);
+                              var Maybe = Elm.Maybe.make(_elm);
+                              var Time = Elm.Time.make(_elm);
+                              var Prelude = Elm.Prelude.make(_elm);
+                              var Graphics = Graphics || {};
+                              Graphics.Element = Elm.Graphics.Element.make(_elm);
+                              var Color = Elm.Color.make(_elm);
+                              var Graphics = Graphics || {};
+                              Graphics.Collage = Elm.Graphics.Collage.make(_elm);
+                              var Graphics = Graphics || {};
+                              Graphics.Input = Elm.Graphics.Input.make(_elm);
+                              var Website = Website || {};
+                              Website.ColorScheme = Elm.Website.ColorScheme.make(_elm);
+                              var Graphics = Graphics || {};
+                              Graphics.Input = Elm.Graphics.Input.make(_elm);
+                              var Window = Elm.Window.make(_elm);
+                              var _op = {};
+                              var topBarHeight = 5;
+                              var pos = A2(Graphics.Element.midLeftAt,
+                                           Graphics.Element.absolute(30),
+                                           Graphics.Element.relative(0.5));
+                              var homeHeaderHeight = 160;
+                              var headerHeight = 95;
+                              var footerHeight = 40;
+                              var copyrightText = _L.append(A2(Text.color,
+                                                               A3(Color.rgb,145,145,145),
+                                                               Text.toText("&copy; 2011-2013 ")),
+                                                            _L.append(A2(Text.link,
+                                                                         "https://github.com/evancz",
+                                                                         Text.toText("Evan Czaplicki")),
+                                                                      _L.append(A2(Text.color,
+                                                                                   A3(Color.rgb,
+                                                                                      145,
+                                                                                      145,
+                                                                                      145),
+                                                                                   Text.toText(" & &copy; 2014 ")),
+                                                                                A2(Text.link,
+                                                                                   "https://www.thobbs.cz",
+                                                                                   Text.toText("Timothy Hobbs")))));
+                              var bigWords = Text.height(50)(Text.color(Website.ColorScheme.mediumGrey)(Text.toText("Noelm Public Library ")));
+                              var alpha = Text.height(20)(Text.color(Website.ColorScheme.accent3)(Text.toText("ALPHA")));
+                              var title = A2(Graphics.Element.flow,
+                                             Graphics.Element.down,
+                                             _J.toList([Text.text(_L.append(bigWords,alpha)),
+                                                        A2(Graphics.Element.spacer,10,4),
+                                                        Text.text(Text.height(20)(Text.color(Website.ColorScheme.mediumGrey)(Text.toText("Discover libraries, browse documentation"))))]));
+                              var homeHeader = F2(function (outer,inner)
+                                                  {
+                                                    return Graphics.Element.color(A3(Color.rgb,
+                                                                                     60,
+                                                                                     60,
+                                                                                     60))(Graphics.Element.layers(_J.toList([A3(Graphics.Element.tiledImage,
+                                                                                                                                outer,
+                                                                                                                                homeHeaderHeight,
+                                                                                                                                "/resources/pattern.gif"),
+                                                                                                                             A3(Graphics.Element.container,
+                                                                                                                                outer,
+                                                                                                                                homeHeaderHeight,
+                                                                                                                                Graphics.Element.middle)(A2(Graphics.Element.flow,
+                                                                                                                                                            Graphics.Element.right,
+                                                                                                                                                            _J.toList([A4(Graphics.Element.container,
+                                                                                                                                                                          inner - 172,
+                                                                                                                                                                          homeHeaderHeight,
+                                                                                                                                                                          pos,
+                                                                                                                                                                          title),
+                                                                                                                                                                       A3(Graphics.Element.container,
+                                                                                                                                                                          172,
+                                                                                                                                                                          homeHeaderHeight,
+                                                                                                                                                                          Graphics.Element.midLeft)(Graphics.Element.link("/catalog")(Graphics.Element.color(Website.ColorScheme.mediumGrey)(A3(Graphics.Element.container,
+                                                                                                                                                                                                                                                                                                142,
+                                                                                                                                                                                                                                                                                                62,
+                                                                                                                                                                                                                                                                                                Graphics.Element.middle)(Graphics.Element.color(Website.ColorScheme.accent4)(A3(Graphics.Element.container,
+                                                                                                                                                                                                                                                                                                                                                                                140,
+                                                                                                                                                                                                                                                                                                                                                                                60,
+                                                                                                                                                                                                                                                                                                                                                                                Graphics.Element.middle)(Text.text(Text.height(20)(Text.color(Website.ColorScheme.lightGrey)(Text.toText("Browse"))))))))))])))])));
+                                                  });
+                              var accents = _J.toList([Website.ColorScheme.accent0,
+                                                       Website.ColorScheme.accent1,
+                                                       Website.ColorScheme.accent2,
+                                                       Website.ColorScheme.accent3,
+                                                       Website.ColorScheme.accent4]);
+                              var topBar = F2(function (k,n)
+                                              {
+                                                return function ()
+                                                       {
+                                                         var n$ = Basics.toFloat(n);
+                                                         var k$ = Basics.toFloat(k);
+                                                         var segs = A2(List.map,
+                                                                       function (i)
+                                                                       {
+                                                                         return Basics.round(n$ * Basics.toFloat(i) / k$);
+                                                                       },
+                                                                       _L.range(1,k));
+                                                         var ws = A3(List.zipWith,
+                                                                     F2(function (x,y)
+                                                                        {
+                                                                          return x - y;
+                                                                        }),
+                                                                     segs,
+                                                                     {ctor: "::", _0: 0, _1: segs});
+                                                         var box = function (w)
+                                                                   {
+                                                                     return A2(Graphics.Element.spacer,
+                                                                               w,
+                                                                               topBarHeight);
+                                                                   };
+                                                         var boxes = A2(List.map,
+                                                                        function (_v0)
+                                                                        {
+                                                                          return function ()
+                                                                                 {
+                                                                                   return box;
+                                                                                 }();
+                                                                        },
+                                                                        _L.range(1,k));
+                                                         var addColors = A2(List.zipWith,
+                                                                            Graphics.Element.color,
+                                                                            _L.append(accents,
+                                                                                      accents));
+                                                         return Graphics.Element.flow(Graphics.Element.right)(addColors(A3(List.zipWith,
+                                                                                                                           F2(function (x,
+                                                                                                                                        y)
+                                                                                                                              {
+                                                                                                                                return x(y);
+                                                                                                                              }),
+                                                                                                                           boxes,
+                                                                                                                           ws)));
+                                                       }();
+                                              });
+                              var internalHome = F2(function (bodyFunc,_v2)
+                                                    {
+                                                      return function ()
+                                                             {
+                                                               switch (_v2.ctor)
+                                                               {case
+                                                                "_Tuple2" :
+                                                                  return function ()
+                                                                         {
+                                                                           var margin = _v2._0 / 10 | 0;
+                                                                           var inner = Basics.truncate(Basics.toFloat(_v2._0) * 0.8);
+                                                                           var content = bodyFunc(A2(Basics.min,
+                                                                                                     inner,
+                                                                                                     _v2._0));
+                                                                           return Graphics.Element.color(Website.ColorScheme.lightGrey)(A2(Graphics.Element.flow,
+                                                                                                                                           Graphics.Element.down,
+                                                                                                                                           _J.toList([A2(topBar,
+                                                                                                                                                         10,
+                                                                                                                                                         _v2._0),
+                                                                                                                                                      A2(homeHeader,
+                                                                                                                                                         _v2._0,
+                                                                                                                                                         inner),
+                                                                                                                                                      function ()
+                                                                                                                                                      {
+                                                                                                                                                        var contentHeight = A2(Basics.max,
+                                                                                                                                                                               Graphics.Element.heightOf(content),
+                                                                                                                                                                               _v2._1 - topBarHeight - homeHeaderHeight - footerHeight);
+                                                                                                                                                        return A4(Graphics.Element.container,
+                                                                                                                                                                  _v2._0,
+                                                                                                                                                                  contentHeight,
+                                                                                                                                                                  Graphics.Element.midTop,
+                                                                                                                                                                  content);
+                                                                                                                                                      }(),
+                                                                                                                                                      A3(Graphics.Element.container,
+                                                                                                                                                         _v2._0,
+                                                                                                                                                         footerHeight,
+                                                                                                                                                         A2(Graphics.Element.midBottomAt,
+                                                                                                                                                            Graphics.Element.relative(0.5),
+                                                                                                                                                            Graphics.Element.absolute(10)))(Text.centered(copyrightText))])));
+                                                                         }();}
+                                                               _E.Case($moduleName,
+                                                                       "between lines 50 and 63");
+                                                             }();
+                                                    });
+                              var home = function (bodyFunc)
+                                         {
+                                           return A2(Signal._op["<~"],
+                                                     internalHome(bodyFunc),
+                                                     Window.dimensions);
+                                         };
+                              var internalSkeleton = F6(function (links,
+                                                                  bodyFunc,
+                                                                  box,
+                                                                  term,
+                                                                  info,
+                                                                  _v6)
+                                                        {
+                                                          return function ()
+                                                                 {
+                                                                   switch (_v6.ctor)
+                                                                   {case
+                                                                    "_Tuple2" :
+                                                                      return function ()
+                                                                             {
+                                                                               var margin = _v6._0 / 10 | 0;
+                                                                               var inner = Basics.truncate(Basics.toFloat(_v6._0) * 0.8);
+                                                                               var content = A3(bodyFunc,
+                                                                                                term,
+                                                                                                info,
+                                                                                                A2(Basics.min,
+                                                                                                   inner,
+                                                                                                   _v6._0));
+                                                                               return Graphics.Element.color(Website.ColorScheme.lightGrey)(A2(Graphics.Element.flow,
+                                                                                                                                               Graphics.Element.down,
+                                                                                                                                               _J.toList([A2(topBar,
+                                                                                                                                                             10,
+                                                                                                                                                             _v6._0),
+                                                                                                                                                          A3(Graphics.Element.container,
+                                                                                                                                                             _v6._0,
+                                                                                                                                                             headerHeight,
+                                                                                                                                                             Graphics.Element.middle)(A2(Graphics.Element.flow,
+                                                                                                                                                                                         Graphics.Element.right,
+                                                                                                                                                                                         _J.toList([A3(Graphics.Element.container,
+                                                                                                                                                                                                       inner - Graphics.Element.widthOf(box) - 10,
+                                                                                                                                                                                                       headerHeight,
+                                                                                                                                                                                                       Graphics.Element.midLeft)(Text.text(Text.height(30)(List.concat(List.intersperse(Text.toText(" / "))({ctor: "::", _0: Text.link("/")(Text.toText("~")), _1: A3(List.zipWith,
+                                                                                                                                                                                                                                                                                                                                                                      F2(function (x,
+                                                                                                                                                                                                                                                                                                                                                                                   y)
+                                                                                                                                                                                                                                                                                                                                                                         {
+                                                                                                                                                                                                                                                                                                                                                                           return x(y);
+                                                                                                                                                                                                                                                                                                                                                                         }),
+                                                                                                                                                                                                                                                                                                                                                                      _L.append(A2(List.repeat,
+                                                                                                                                                                                                                                                                                                                                                                                   List.length(links),
+                                                                                                                                                                                                                                                                                                                                                                                   Basics.uncurry(Text.link)),
+                                                                                                                                                                                                                                                                                                                                                                                _J.toList([Basics.snd])),
+                                                                                                                                                                                                                                                                                                                                                                      {ctor: "::", _0: {ctor: "_Tuple2", _0: "/catalog", _1: Text.toText("Catalog")}, _1: links})}))))),
+                                                                                                                                                                                                    A3(Graphics.Element.container,
+                                                                                                                                                                                                       Graphics.Element.widthOf(box) + 10,
+                                                                                                                                                                                                       headerHeight,
+                                                                                                                                                                                                       Graphics.Element.midRight)(Graphics.Element.color(Website.ColorScheme.mediumGrey)(A3(Graphics.Element.container,
+                                                                                                                                                                                                                                                                                            Graphics.Element.widthOf(box) + 2,
+                                                                                                                                                                                                                                                                                            Graphics.Element.heightOf(box) + 2,
+                                                                                                                                                                                                                                                                                            Graphics.Element.middle)(A2(Graphics.Element.color,
+                                                                                                                                                                                                                                                                                                                        Color.white,
+                                                                                                                                                                                                                                                                                                                        box))))]))),
+                                                                                                                                                          function ()
+                                                                                                                                                          {
+                                                                                                                                                            var contentHeight = A2(Basics.max,
+                                                                                                                                                                                   Graphics.Element.heightOf(content),
+                                                                                                                                                                                   _v6._1 - topBarHeight - headerHeight - footerHeight);
+                                                                                                                                                            return A4(Graphics.Element.container,
+                                                                                                                                                                      _v6._0,
+                                                                                                                                                                      contentHeight,
+                                                                                                                                                                      Graphics.Element.midTop,
+                                                                                                                                                                      content);
+                                                                                                                                                          }(),
+                                                                                                                                                          A3(Graphics.Element.container,
+                                                                                                                                                             _v6._0,
+                                                                                                                                                             footerHeight,
+                                                                                                                                                             A2(Graphics.Element.midBottomAt,
+                                                                                                                                                                Graphics.Element.relative(0.5),
+                                                                                                                                                                Graphics.Element.absolute(10)))(Text.centered(copyrightText))])));
+                                                                             }();}
+                                                                   _E.Case($moduleName,
+                                                                           "between lines 18 and 39");
+                                                                 }();
+                                                        });
+                              var $ = Graphics.Input.field("  filter"),
+                                  box = $._0,
+                                  searchTerm = $._1;
+                              var skeleton = F3(function (links,bodyFunc,info)
+                                                {
+                                                  return A5(Signal.lift4,
+                                                            A2(internalSkeleton,links,bodyFunc),
+                                                            box,
+                                                            searchTerm,
+                                                            info,
+                                                            Window.dimensions);
+                                                });
+                              _elm.Website.Skeleton.values = {_op: _op, skeleton: skeleton, home: home};
+                              return _elm.Website.Skeleton.values;
+                            };Elm.Website = Elm.Website || {};
+Elm.Website.ColorScheme = Elm.Website.ColorScheme || {};
+Elm.Website.ColorScheme.make = function (_elm)
+                               {
+                                 _elm.Website = _elm.Website || {};
+                                 _elm.Website.ColorScheme = _elm.Website.ColorScheme || {};
+                                 if (_elm.Website.ColorScheme.values)
+                                 return _elm.Website.ColorScheme.values;
+                                 var N = Elm.Native,
+                                     _N = N.Utils.make(_elm),
+                                     _L = N.List.make(_elm),
+                                     _E = N.Error.make(_elm),
+                                     _J = N.JavaScript.make(_elm),
+                                     $moduleName = "Website.ColorScheme";
+                                 var Text = Elm.Text.make(_elm);
+                                 var Text = Elm.Text.make(_elm);
+                                 var Basics = Elm.Basics.make(_elm);
+                                 var Signal = Elm.Signal.make(_elm);
+                                 var List = Elm.List.make(_elm);
+                                 var Maybe = Elm.Maybe.make(_elm);
+                                 var Time = Elm.Time.make(_elm);
+                                 var Prelude = Elm.Prelude.make(_elm);
+                                 var Graphics = Graphics || {};
+                                 Graphics.Element = Elm.Graphics.Element.make(_elm);
+                                 var Color = Elm.Color.make(_elm);
+                                 var Graphics = Graphics || {};
+                                 Graphics.Collage = Elm.Graphics.Collage.make(_elm);
+                                 var _op = {};
+                                 var mediumGrey = A3(Color.rgb,216,221,225);
+                                 var lightGrey = A3(Color.rgb,245,245,245);
+                                 var accent4 = A3(Color.rgb,127,209,59);
+                                 var accent3 = A3(Color.rgb,234,21,122);
+                                 var accent2 = A3(Color.rgb,240,173,0);
+                                 var accent1 = A3(Color.rgb,96,181,204);
+                                 var accent0 = A3(Color.rgb,90,99,120);
+                                 _elm.Website.ColorScheme.values = {_op: _op, accent0: accent0, accent1: accent1, accent2: accent2, accent3: accent3, accent4: accent4, lightGrey: lightGrey, mediumGrey: mediumGrey};
+                                 return _elm.Website.ColorScheme.values;
+                               };</script></head><body><script type="text/javascript">Elm.fullscreen(Elm.Home)</script><noscript></noscript></body></html>

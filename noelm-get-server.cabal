@@ -1,0 +1,61 @@
+Name:                noelm-get-server
+Version:             0.1
+Synopsis:            Server for sharing Noelm libraries
+Description:         noelm-get-server allows for the publishing of Noelm libraries
+
+License:             BSD3
+License-file:        LICENSE
+
+Author:              Evan Czaplicki
+Maintainer:          timothyhobbs@seznam.cz
+Copyright:           Copyright: (c) 2013-2014 Evan Czaplicki, 2014 Timothy Hobbs
+
+Category:            Language
+
+Build-type:          Simple
+Cabal-version:       >=1.9
+
+source-repository head
+  type:     git
+  location: git://github.com/timthelion/noelm-get.git
+
+Executable noelm-get-server
+  Main-is:             Noelm/Get/Server/Server.hs
+  ghc-options:         -threaded -O2
+  Hs-Source-Dirs:      src
+
+  other-modules:
+       Noelm.Get.Server.Routes
+      ,Noelm.Get.Server.Generate.Docs
+      ,Noelm.Get.Server.Generate.Html
+      ,Noelm.Get.Server.Generate.Listing
+      ,Noelm.Get.Server.Generate.Noelm
+
+
+  Build-depends:       base >=4.2 && <5,
+                       binary,
+                       noelm-get,
+                       bytestring,
+                       cmdargs,
+                       containers,
+                       directory,
+                       Noelm >= 0.10.0,
+                       filepath,
+                       HTTP,
+                       http-conduit >= 1.9, http-conduit < 2.0,
+                       http-types,
+                       json,
+                       mtl,
+                       network,
+                       pretty,
+                       process,
+                       resourcet,
+                       text,
+                       vector,
+                       aeson,
+                       blaze-html,
+                       parsec,
+                       snap-core,
+                       snap-server,
+                       unordered-containers
+                       

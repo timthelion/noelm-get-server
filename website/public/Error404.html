@@ -1,0 +1,203 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="UTF-8"><style type="text/css">
+  a:link {text-decoration: none; color: rgb(15,102,230);}
+  a:visited {text-decoration: none; color: rgb(15,102,230);}
+  a:active {text-decoration: none}
+  a:hover {text-decoration: underline; color: rgb(234,21,122);}
+  body { font-family: "Lucida Grande","Trebuchet MS","Bitstream Vera Sans",Verdana,Helvetica,sans-serif !important; }
+  p, li { font-size: 14px !important;
+          line-height: 1.5em !important; }
+</style><title>Error404</title><script type="text/javascript" src="/resources/noelm-runtime.js"></script><script type="text/javascript">Elm.Main = Elm.Main || {};
+Elm.Main.make = function (_elm)
+                {
+                  _elm.Main = _elm.Main || {};
+                  if (_elm.Main.values)
+                  return _elm.Main.values;
+                  var N = Elm.Native,
+                      _N = N.Utils.make(_elm),
+                      _L = N.List.make(_elm),
+                      _E = N.Error.make(_elm),
+                      _J = N.JavaScript.make(_elm),
+                      $moduleName = "Main";
+                  var Text = Elm.Text.make(_elm);
+                  var Text = Elm.Text.make(_elm);
+                  var Basics = Elm.Basics.make(_elm);
+                  var Signal = Elm.Signal.make(_elm);
+                  var List = Elm.List.make(_elm);
+                  var Maybe = Elm.Maybe.make(_elm);
+                  var Time = Elm.Time.make(_elm);
+                  var Prelude = Elm.Prelude.make(_elm);
+                  var Graphics = Graphics || {};
+                  Graphics.Element = Elm.Graphics.Element.make(_elm);
+                  var Color = Elm.Color.make(_elm);
+                  var Graphics = Graphics || {};
+                  Graphics.Collage = Elm.Graphics.Collage.make(_elm);
+                  var Website = Website || {};
+                  Website.Message = Elm.Website.Message.make(_elm);
+                  var _op = {};
+                  var main = Website.Message.report(Text.markdown("<div style=\"height:0;width:0;\">&nbsp;</div><h1><div>\n404\n<div style=\"font-size:0.5em;font-weight:normal\">\n<em>Page Not Found</em>\n</div>\n</div>\n</h1>\n\n<div style=\"height:0;width:0;\">&nbsp;</div>",
+                                                                  "4:15"));
+                  _elm.Main.values = {_op: _op, main: main};
+                  return _elm.Main.values;
+                };Elm.Website = Elm.Website || {};
+Elm.Website.Message = Elm.Website.Message || {};
+Elm.Website.Message.make = function (_elm)
+                           {
+                             _elm.Website = _elm.Website || {};
+                             _elm.Website.Message = _elm.Website.Message || {};
+                             if (_elm.Website.Message.values)
+                             return _elm.Website.Message.values;
+                             var N = Elm.Native,
+                                 _N = N.Utils.make(_elm),
+                                 _L = N.List.make(_elm),
+                                 _E = N.Error.make(_elm),
+                                 _J = N.JavaScript.make(_elm),
+                                 $moduleName = "Website.Message";
+                             var Text = Elm.Text.make(_elm);
+                             var Text = Elm.Text.make(_elm);
+                             var Basics = Elm.Basics.make(_elm);
+                             var Signal = Elm.Signal.make(_elm);
+                             var List = Elm.List.make(_elm);
+                             var Maybe = Elm.Maybe.make(_elm);
+                             var Time = Elm.Time.make(_elm);
+                             var Prelude = Elm.Prelude.make(_elm);
+                             var Graphics = Graphics || {};
+                             Graphics.Element = Elm.Graphics.Element.make(_elm);
+                             var Color = Elm.Color.make(_elm);
+                             var Graphics = Graphics || {};
+                             Graphics.Collage = Elm.Graphics.Collage.make(_elm);
+                             var Website = Website || {};
+                             Website.ColorScheme = Elm.Website.ColorScheme.make(_elm);
+                             var Window = Elm.Window.make(_elm);
+                             var _op = {};
+                             var accents = _J.toList([Website.ColorScheme.accent0,
+                                                      Website.ColorScheme.accent1,
+                                                      Website.ColorScheme.accent2,
+                                                      Website.ColorScheme.accent3,
+                                                      Website.ColorScheme.accent4]);
+                             var topBar = F2(function (k,n)
+                                             {
+                                               return function ()
+                                                      {
+                                                        var n$ = Basics.toFloat(n);
+                                                        var k$ = Basics.toFloat(k);
+                                                        var segs = A2(List.map,
+                                                                      function (i)
+                                                                      {
+                                                                        return Basics.round(n$ * Basics.toFloat(i) / k$);
+                                                                      },
+                                                                      _L.range(1,k));
+                                                        var ws = A3(List.zipWith,
+                                                                    F2(function (x,y)
+                                                                       {
+                                                                         return x - y;
+                                                                       }),
+                                                                    segs,
+                                                                    {ctor: "::", _0: 0, _1: segs});
+                                                        var accentCycle = A2(List.concatMap,
+                                                                             function (_v0)
+                                                                             {
+                                                                               return function ()
+                                                                                      {
+                                                                                        return accents;
+                                                                                      }();
+                                                                             },
+                                                                             _L.range(0,k / 5 | 0));
+                                                        return Graphics.Element.flow(Graphics.Element.right)(A3(List.zipWith,
+                                                                                                                F2(function (c,
+                                                                                                                             w)
+                                                                                                                   {
+                                                                                                                     return Graphics.Element.color(c)(A2(Graphics.Element.spacer,
+                                                                                                                                                         w,
+                                                                                                                                                         5));
+                                                                                                                   }),
+                                                                                                                accentCycle,
+                                                                                                                ws));
+                                                      }();
+                                             });
+                             var box = function (e)
+                                       {
+                                         return function ()
+                                                {
+                                                  var w = Graphics.Element.widthOf(e);
+                                                  var h = Graphics.Element.heightOf(e);
+                                                  return A2(Graphics.Element.flow,
+                                                            Graphics.Element.down,
+                                                            _J.toList([A2(topBar,5,w + 40),
+                                                                       Graphics.Element.color(Website.ColorScheme.mediumGrey)(A3(Graphics.Element.container,
+                                                                                                                                 w + 40,
+                                                                                                                                 h + 11,
+                                                                                                                                 Graphics.Element.midTop)(Graphics.Element.color(Website.ColorScheme.lightGrey)(A3(Graphics.Element.container,
+                                                                                                                                                                                                                   w + 38,
+                                                                                                                                                                                                                   h + 10,
+                                                                                                                                                                                                                   Graphics.Element.midTop)(e))))]));
+                                                }();
+                                       };
+                             var scene = F2(function (msg,_v2)
+                                            {
+                                              return function ()
+                                                     {
+                                                       switch (_v2.ctor)
+                                                       {case
+                                                        "_Tuple2" :
+                                                          return Graphics.Element.layers(_J.toList([A3(Graphics.Element.tiledImage,
+                                                                                                       _v2._0,
+                                                                                                       _v2._1,
+                                                                                                       "/resources/texture.png"),
+                                                                                                    A4(Graphics.Element.container,
+                                                                                                       _v2._0,
+                                                                                                       _v2._1,
+                                                                                                       Graphics.Element.middle,
+                                                                                                       box(A2(Graphics.Element.width,
+                                                                                                              300,
+                                                                                                              msg)))]));}
+                                                       _E.Case($moduleName,
+                                                               "between lines 17 and 19");
+                                                     }();
+                                            });
+                             var report = function (msg)
+                                          {
+                                            return A2(Signal._op["<~"],
+                                                      scene(msg),
+                                                      Window.dimensions);
+                                          };
+                             _elm.Website.Message.values = {_op: _op, report: report};
+                             return _elm.Website.Message.values;
+                           };Elm.Website = Elm.Website || {};
+Elm.Website.ColorScheme = Elm.Website.ColorScheme || {};
+Elm.Website.ColorScheme.make = function (_elm)
+                               {
+                                 _elm.Website = _elm.Website || {};
+                                 _elm.Website.ColorScheme = _elm.Website.ColorScheme || {};
+                                 if (_elm.Website.ColorScheme.values)
+                                 return _elm.Website.ColorScheme.values;
+                                 var N = Elm.Native,
+                                     _N = N.Utils.make(_elm),
+                                     _L = N.List.make(_elm),
+                                     _E = N.Error.make(_elm),
+                                     _J = N.JavaScript.make(_elm),
+                                     $moduleName = "Website.ColorScheme";
+                                 var Text = Elm.Text.make(_elm);
+                                 var Text = Elm.Text.make(_elm);
+                                 var Basics = Elm.Basics.make(_elm);
+                                 var Signal = Elm.Signal.make(_elm);
+                                 var List = Elm.List.make(_elm);
+                                 var Maybe = Elm.Maybe.make(_elm);
+                                 var Time = Elm.Time.make(_elm);
+                                 var Prelude = Elm.Prelude.make(_elm);
+                                 var Graphics = Graphics || {};
+                                 Graphics.Element = Elm.Graphics.Element.make(_elm);
+                                 var Color = Elm.Color.make(_elm);
+                                 var Graphics = Graphics || {};
+                                 Graphics.Collage = Elm.Graphics.Collage.make(_elm);
+                                 var _op = {};
+                                 var mediumGrey = A3(Color.rgb,216,221,225);
+                                 var lightGrey = A3(Color.rgb,245,245,245);
+                                 var accent4 = A3(Color.rgb,127,209,59);
+                                 var accent3 = A3(Color.rgb,234,21,122);
+                                 var accent2 = A3(Color.rgb,240,173,0);
+                                 var accent1 = A3(Color.rgb,96,181,204);
+                                 var accent0 = A3(Color.rgb,90,99,120);
+                                 _elm.Website.ColorScheme.values = {_op: _op, accent0: accent0, accent1: accent1, accent2: accent2, accent3: accent3, accent4: accent4, lightGrey: lightGrey, mediumGrey: mediumGrey};
+                                 return _elm.Website.ColorScheme.values;
+                               };</script></head><body><script type="text/javascript">Elm.fullscreen(Elm.Main)</script><noscript></noscript></body></html>
