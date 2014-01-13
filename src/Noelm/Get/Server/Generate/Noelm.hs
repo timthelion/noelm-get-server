@@ -17,8 +17,23 @@ import System.FilePath ((</>), (<.>))
 import Text.Parsec
 
 {- Noelm moduels -}
-import Noelm.Internal.Dependencies as Deps
-import Noelm.Internal.Documentation as Docs
+import qualified Noelm.Internal.Dependencies as Deps
+import Noelm.Internal.Dependencies
+ (Deps
+ ,name
+ ,version)
+import qualified Noelm.Internal.Documentation as Docs
+import Noelm.Internal.Documentation
+  (Document
+  ,structure
+  ,moduleName
+  ,Entry
+  ,name
+  ,entries
+  ,Content(Markdown,Value)
+  ,raw
+  ,assocPrec
+  ,comment)
 import qualified Noelm.Internal.Name as N
 
 {- noelm-get modules -}
@@ -34,28 +49,56 @@ generate docs deps directory = (++) <$> makeDocs <*> makeDeps
         do liftIO $ writeFile (directory </> Path.index) (depsToNoelm deps)
            return [directory </> Path.index]
 
+filterSpecialChars :: String -> String
+filterSpecialChars s =
+ case s of
+  (c:cs) ->
+   case c of
+    '<' -> "&lt;" ++ filterSpecialChars cs
+    '&' -> "&amp;" ++ filterSpecialChars cs
+    _   -> c : filterSpecialChars cs
+  [] -> []
+
 depsToNoelm :: Deps -> String
 depsToNoelm deps = 
-    unlines [ "import Website.Skeleton (skeleton)"
-            , "import Website.ColorScheme as C"
+    concat  [ "import Website.Skeleton (skeleton)\n"
+            , "import Website.ColorScheme as C\n"
             , ""
-            , "links = [ (\"" ++ toLink deps "" ++ "\", toText \"" ++ N.project (Deps.name deps) ++ "\") ]"
-            , ""
-            , "main = skeleton links scene (constant ())"
-            , ""
-            , "scene term () w ="
-            , "  flow down"
-            , "  [ color C.mediumGrey <| spacer w 1"
-            , "  , width w [markdown|" ++ Deps.description deps ++ "|]"
-            , "  , width w [markdown|" ++ concatMap markdownLink (Deps.exposed deps) ++ "|]"
-            , "  , width w [markdown|The [source code is on GitHub](" ++ Deps.repo deps ++ "),"
-            , "so you can star projects, report issues, and follow great library designers."
-            , ""
-            , "See all previous versions of this library [here](/catalog/" ++ N.toFilePath (Deps.name deps) ++ ").|]"
-            , "  ]"
+            , "links = [ (\""
+            , filterSpecialChars $ toLink deps ""
+            , "\", toText \""
+            , filterSpecialChars $ N.project (Deps.name deps)
+            , "\") ]\n"
+            , "\n"
+            , "main = skeleton links scene (constant ())\n"
+            , "\n"
+            , "scene term () w =\n"
+            , "  flow down\n"
+            , "  [ color C.mediumGrey <| spacer w 1\n"
+            , "  , width w [markdown|"
+            , filterSpecialChars $ Deps.description deps
+            , "|]\n"
+            , "  , width w [markdown|"
+            , concatMap markdownLink (Deps.exposed deps)
+            , "|]\n"
+            , "  , width w [markdown|The [source code is on GitHub]("
+            , filterSpecialChars $ Deps.repo deps
+            , "),\n"
+            , "so you can star projects, report issues, and follow great library designers.\n"
+            , "\n"
+            , "See all previous versions of this library [here](/catalog/"
+            , filterSpecialChars $ N.toFilePath (Deps.name deps)
+            , ").|]\n"
+            , "  ]\n"
             ]
     where
-      markdownLink m = "[" ++ m ++ "](" ++ toLink deps m ++ ")<br/>"
+      markdownLink m =
+        concat
+         [ "["
+         , filterSpecialChars m
+         , "]("
+         , filterSpecialChars $ toLink deps m
+         , ")<br/>"]
 
 
 toLink deps m =
@@ -78,24 +121,38 @@ docToNoelm deps doc =
      case Either.partitionEithers $ map (contentToNoelm (getEntries doc)) contents of
        ([], code) ->
            Right . (,) name $
-           unlines [ "import Website.Skeleton (skeleton)"
-                   , "import Website.ColorScheme as C"
-                   , "import Docs (entry)"
-                   , "import String"
-                   , ""
-                   , "links = [ (\"" ++ toLink deps "" ++ "\", toText \"" ++ N.project (Deps.name deps) ++ "\")"
-                   , "        , (\"" ++ toLink deps name ++ "\", toText " ++ show name ++ ") ]"
-                   , ""
-                   , "main = skeleton links scene (constant ())"
-                   , ""
-                   , "scene term () w ="
-                   , "    flow down . map snd . filter (String.contains (String.toLower term) . fst) <|"
-                   , "    [ (\"\", color C.mediumGrey <| spacer w 1)"
-                   , "    , " ++ List.intercalate "\n    , " code
-                   , "    ]"
+           concat  [ "import Website.Skeleton (skeleton)\n"
+                   , "import Website.ColorScheme as C\n"
+                   , "import Docs (entry)\n"
+                   , "import String\n"
+                   , "\n"
+                   , "links = [ (\""
+                   , filterSpecialChars $ toLink deps ""
+                   , "\", toText \""
+                   , filterSpecialChars $ N.project (Deps.name deps)
+                   , "\")\n"
+                   , "        , (\""
+                   , filterSpecialChars $ toLink deps name
+                   , "\", toText \""
+                   , filterSpecialChars name
+                   , "\") ]\n"
+                   , "\n"
+                   , "main = skeleton links scene (constant ())\n"
+                   , "\n"
+                   , "scene term () w =\n"
+                   , "    flow down . map snd . filter (String.contains (String.toLower term) . fst) <|\n"
+                   , "    [ (\"\", color C.mediumGrey <| spacer w 1)\n"
+                   , "    , "
+                   , List.intercalate "\n    , " code
+                   , "    ]\n"
                    ]
        (missing, _) ->
-           Left $ "In module " ++ name ++ ", could not find documentation for: " ++ List.intercalate ", " missing
+           Left $
+            concat
+             [ "In module "
+             , filterSpecialChars name
+             , ", could not find documentation for: "
+             , filterSpecialChars $ List.intercalate ", " missing]
   where
     name = moduleName doc
     entries = getEntries doc
@@ -127,19 +184,32 @@ getEntries doc =
 contentToNoelm :: Map.Map String Entry -> Content -> Either String String
 contentToNoelm entries content =
     case content of
-      Markdown md -> Right $ "(,) \"\" <| width w [markdown|<style>h1,h2,h3,h4 {font-weight:normal;} h1 {font-size:20px;} h2 {font-size:18px;}</style>" ++ md ++ "|]"
+      Markdown md ->
+        Right $ concat
+         [ "(,) \"\" <| width w [markdown|<style>h1,h2,h3,h4 {font-weight:normal;} h1 {font-size:20px;} h2 {font-size:18px;}</style>"
+         , filterSpecialChars md
+         , "|]" ]
       Value name ->
           case Map.lookup name entries of
             Nothing -> Left name
             Just entry ->
-                Right $ unwords [ "(,)"
-                                , "(String.toLower " ++ show name ++ ")"
-                                , "<|"
-                                , "entry w"
-                                , show name
-                                , show (raw entry)
-                                , case assocPrec entry of
-                                    Nothing -> "Nothing"
-                                    Just ap -> "(" ++ show (Just ap) ++ ")"
-                                , "[markdown|" ++ comment entry ++ "|]"
-                                ]
+                Right $ unwords
+                 [ "(,)"
+                 , "(String.toLower \""
+                 , filterSpecialChars name
+                 , "\")"
+                 , "<|"
+                 , "entry w"
+                 , "\""
+                 , filterSpecialChars name
+                 , "\" \""
+                 , filterSpecialChars $ raw entry
+                 , "\" "                   
+                 , filterSpecialChars $ 
+                    case assocPrec entry of
+                      Nothing -> "Nothing"
+                      Just ap -> "(" ++ show (Just ap) ++ ")"
+                 , "[markdown|"
+                 , filterSpecialChars $ comment entry
+                 , "|]"
+                 ]
