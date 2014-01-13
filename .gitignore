@@ -2,5 +2,7 @@
 dist/*
 website/log/*
 website/cache/*
+website/public/*
 website/resources/docs.json
 website/resources/noelm-runtime.js
+website/listing.bits
