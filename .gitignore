@@ -2,6 +2,8 @@
 dist/*
 website/log/*
 website/cache/*
+website/src/cache/*
+website/src/build/*
 website/public/*
 website/resources/docs.json
 website/resources/noelm-runtime.js
