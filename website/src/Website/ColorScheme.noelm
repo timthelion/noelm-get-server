@@ -1,12 +1,13 @@
 
 module Website.ColorScheme where 
 
-accent0 = rgb 90 99 120
-
-accent1 = rgb 96 181 204
-accent2 = rgb 240 173 0
-accent3 = rgb 234 21 122
-accent4 = rgb 127 209 59
+darkOrange = rgb 166 112 0
+orange = rgb 191 145 48
+medOrange = rgb 255 193 64
+medBlue = rgb 43 66 129
+darkBlue = rgb 6 34 112
+blue = rgb 19 60 172
+lightBlue = rgb 109 137 213
 
 lightGrey  = rgb 245 245 245
 mediumGrey = rgb 216 221 225

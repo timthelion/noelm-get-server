@@ -20,10 +20,9 @@ internalSkeleton links bodyFunc box term info (outer,h) =
     in
     color C.lightGrey <|
     flow down
-    [ topBar 10 outer
-    , container outer headerHeight middle <| flow right
+    [ color C.blue <| container outer headerHeight middle <| flow right
       [ container (inner - widthOf box - 10) headerHeight midLeft <|
-        text <| Text.height 30 <| concat <| intersperse (toText " / ") <| (Text.link "/" <| toText "~") ::
+        text <| Text.color C.medOrange <| Text.height 30 <| concat <| intersperse (toText " / ") <| (Text.link "/" <| toText "~") ::
         zipWith (<|) (repeat (length links) (uncurry Text.link) ++ [snd]) (("/catalog", toText "Catalog") :: links)
       , container (widthOf box + 10) headerHeight midRight <|
         color C.mediumGrey <|
@@ -31,7 +30,7 @@ internalSkeleton links bodyFunc box term info (outer,h) =
         color white box
       ]
     , let contentHeight = max (heightOf content)
-                              (h - topBarHeight - headerHeight - footerHeight)
+                              (h - headerHeight - footerHeight)
       in  container outer contentHeight midTop content
     , footer
     ]
@@ -48,51 +47,34 @@ internalHome bodyFunc (windowWidth,windowHeight) =
     in
     color C.lightGrey <|
     flow down
-    [ topBar 10 outer
-    , homeHeader outer inner
+    [ homeHeader outer inner
     , let contentHeight = max (heightOf content)
-                              (h - topBarHeight - homeHeaderHeight - footerHeight)
+                              (h - homeHeaderHeight - footerHeight)
       in  container outer contentHeight midTop content
     ,footer
     ]
 
 homeHeaderHeight = 160
 homeHeader outer inner =
-    color (rgb 60 60 60) <| layers
-    [ tiledImage outer homeHeaderHeight "/resources/pattern.gif"
-    , container outer homeHeaderHeight middle <|
+    color C.blue <|
+      container outer homeHeaderHeight middle <|
       flow right [ container (inner - 172) homeHeaderHeight pos title
                  , container 172 homeHeaderHeight midLeft <|
                    link "/catalog" <| 
                    color C.mediumGrey <| container 142 62 middle <|
-                   color C.accent4 <| container 140 60 middle <|
-                   text . Text.height 20 . Text.color C.lightGrey <| toText "Browse"
+                   color C.medOrange <| container 140 60 middle <|
+                   text . Text.height 20 . Text.color C.medBlue <| toText "Browse"
                  ]
-    ]
-           
 
 pos = midLeftAt (absolute 30) (relative 0.5)
-bigWords = Text.height 50 <| Text.color C.mediumGrey <| toText "Noelm Public Library "
-alpha = Text.height 20 <| Text.color C.accent3 <| toText "ALPHA"
+bigWords = Text.height 50 <| Text.color C.lightBlue <| toText "Noelm Public Library "
+alpha = Text.height 20 <| Text.color (rgb 255 255 255) <| toText "ALPHA"
 title =
     flow down
     [ text <| bigWords ++ alpha
     , spacer 10 4
     , text . Text.height 20 . Text.color C.mediumGrey <| toText "Discover libraries, browse documentation"
     ]
-
-accents = [C.accent0,C.accent1,C.accent2,C.accent3,C.accent4]
-
-topBarHeight = 5
-topBar k n =
-    let n' = toFloat n
-        k' = toFloat k
-        segs = map (\i -> round (n' * toFloat i / k')) [1..k]
-        ws = zipWith (-) segs (0::segs)
-        addColors = zipWith color (accents ++ accents)
-        box w = spacer w topBarHeight
-        boxes = map (\_ -> box) [1..k]
-    in  flow right <| addColors (zipWith (<|) boxes ws)
 
 footerHeight = heightOf footer * 2
 footer = Text.centered <| sourceLink ++ copyrightText
