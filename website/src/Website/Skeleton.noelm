@@ -6,7 +6,6 @@ import Graphics.Input as Input
 import Window
 
 headerHeight = 95
-footerHeight = 40
 
 (box, searchTerm) = Input.field "  filter"
 
@@ -34,24 +33,18 @@ internalSkeleton links bodyFunc box term info (outer,h) =
     , let contentHeight = max (heightOf content)
                               (h - topBarHeight - headerHeight - footerHeight)
       in  container outer contentHeight midTop content
-    , container outer footerHeight (midBottomAt (relative 0.5) (absolute 10)) <|
-       Text.centered copyrightText
+    , footer
     ]
 
 home bodyFunc = internalHome bodyFunc <~ Window.dimensions
 
-sourceLink = Text.link "https://github.com/timthelion/noelm-get-server" (toText "Source ")
-
-copyrightText =
- Text.color (rgb 145 145 145) (toText "&copy; 2011-2013 ") ++
- Text.link "https://github.com/evancz" (toText "Evan Czaplicki") ++
- Text.color (rgb 145 145 145) (toText " & &copy; 2014 ") ++
- Text.link "http://www.thobbs.cz" (toText "Timothy Hobbs")
-
-internalHome bodyFunc (outer,h) =
-    let margin = outer `div` 10
-        inner = truncate (toFloat outer * 0.8)
-        content = bodyFunc (min inner outer)
+internalHome bodyFunc (windowWidth,windowHeight) =
+    let
+     outer = windowWidth
+     h = windowHeight
+     margin = outer `div` 10
+     inner = truncate (toFloat outer * 0.8)
+     content = bodyFunc (min inner outer)
     in
     color C.lightGrey <|
     flow down
@@ -60,8 +53,7 @@ internalHome bodyFunc (outer,h) =
     , let contentHeight = max (heightOf content)
                               (h - topBarHeight - homeHeaderHeight - footerHeight)
       in  container outer contentHeight midTop content
-    , container outer footerHeight (midBottomAt (relative 0.5) (absolute 10)) <|
-       Text.centered <| sourceLink ++ copyrightText
+    ,footer
     ]
 
 homeHeaderHeight = 160
@@ -101,3 +93,14 @@ topBar k n =
         box w = spacer w topBarHeight
         boxes = map (\_ -> box) [1..k]
     in  flow right <| addColors (zipWith (<|) boxes ws)
+
+footerHeight = heightOf footer * 2
+footer = Text.centered <| sourceLink ++ copyrightText
+
+sourceLink = Text.link "https://github.com/timthelion/noelm-get-server" (toText "Source ")
+
+copyrightText =
+ Text.color (rgb 145 145 145) (toText "&copy; 2011-2013 ") ++
+ Text.link "https://github.com/evancz" (toText "Evan Czaplicki") ++
+ Text.color (rgb 145 145 145) (toText " & &copy; 2014 ") ++
+ Text.link "http://www.thobbs.cz" (toText "Timothy Hobbs")
