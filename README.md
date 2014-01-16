@@ -77,7 +77,13 @@ $ git clone https://github.com/timthelion/noelm-get-server.git
 $ cabal install Noelm/ noelm-get/ noelm-get-server/
 ````
 
-#### Give the server access to low numbered ports
+#### Make the server accessable to the world:
+
+You have two options.
+
+** Stand alone server **
+
+You can make the server accessible to the world by giving it access to low numbered ports as so:
 
 ````
 $ su
@@ -85,6 +91,25 @@ $ su
 # setcap 'cap_net_bind_service=+ep' /home/noelm-get/.cabal/bin/noelm-get-server
 # exit
 ````
+
+** Server as a subdomain with lighttpd **
+
+I run my server as under the [noelm-get.thobbs.cz](http://noelm-get.thobbs.cz) subdomain of [thobbs.cz](http://thobbs.cz) by adding the following lines to my lighttpd.conf file:
+
+````
+server.modules +=  ("mod_proxy")
+````
+
+````
+$HTTP["host"] =~ "noelm-get.thobbs." {
+        proxy.balance = "fair"
+        proxy.server  = ( "" => (
+        ( "host" => "127.0.0.1", "port" => 8000 ))
+    )
+}
+````
+  
+And setting noelm-get-server's port to 8000.
 
 #### Install the init.d service file
 
